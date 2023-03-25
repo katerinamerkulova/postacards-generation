@@ -3,29 +3,32 @@ import re
 
 import streamlit as st
 
-from keywords import get_keywords
+from keywords import Analyzer
 from stable_diffusion_generator import Generator as sd_generator
+
+analyzer = Analyzer()
+sd = sd_generator()
 
 st.title('Реконструкция открыток')
 st.subheader('Период открыток')
-years = st.slider('', 1891, 2014, (1941, 1965))
+start_year, end_year = st.slider('', 1891, 2014, (1941, 1965))
 
-key_words = get_keywords(years)
+analyzer = Analyzer()
+
+key_words = analyzer.pipeline(start_year, end_year)
 st.subheader('Ключевые слова')
-st.text(f'{" ".join(key_words)}')
+st.text(key_words)
 
-key_words = st.text_input('Ключевые слова', f'{", ".join(key_words)}')
+key_words = st.text_input('Ключевые слова', key_words)
 key_words = re.findall('\w+', key_words)
-
-sd = sd_generator()
 
 text = (
     f"Почтовая открытка "
-    # f"{random.randint(*years)} год: "
-    f"{'-'.join((str(x) for x in years))} годов: "
-    f"{', '.join(key_words)}"
+    f"{start_year}-{end_year} годов: "
+    f"{' '.join(key_words)}"
 )
 st.text(text)
 
-images = sd.get_images(text)
-st.image(images, width=350)
+if st.button('Генерировать открытки!'):
+    images = sd.get_images(text)
+    st.image(images, width=350)

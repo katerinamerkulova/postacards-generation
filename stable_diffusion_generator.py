@@ -15,8 +15,8 @@ class Generator:
         eng_prompts = [ts.translate_text(text) + ' high quality, high resolution, 4 k'] * num_eng
         
         images = []
-        images.extend(self.pipe(rus_promts).images)
         images.extend(self.pipe(eng_prompts).images)
+        images.extend(self.pipe(rus_promts).images)
         return images
 
 
