@@ -7,7 +7,7 @@ class Generator:
     def __init__(self):
         model_id = "runwayml/stable-diffusion-v1-5"
         self.pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
-        #self.pipe = self.pipe.to("cuda")
+        self.pipe = self.pipe.to("cuda")
 
     def get_images(self, text):
         num_rus, num_eng = 2, 2
