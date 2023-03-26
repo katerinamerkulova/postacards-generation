@@ -20,7 +20,7 @@ st.subheader('Ключевые слова')
 st.text(key_words)
 
 key_words = st.text_input('Ключевые слова', key_words)
-key_words = re.findall('\w+', key_words)
+key_words = re.findall('[а-яА-ЯёЁ]+', key_words)
 
 text = (
     f"Почтовая открытка "

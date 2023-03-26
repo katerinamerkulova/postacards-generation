@@ -5,3 +5,6 @@ Cython
 streamlit
 diffusers
 translators
+torch
+transformers
+accelerate
