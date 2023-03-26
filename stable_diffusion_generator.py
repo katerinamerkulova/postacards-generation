@@ -10,7 +10,7 @@ class Generator:
         self.pipe = self.pipe.to("cuda")
 
     def get_images(self, text):
-        num_rus, num_eng = 2, 2
+        num_rus = 4
         rus_promts = [text + ' high quality, high resolution, 4 k'] * num_rus
         #eng_prompts = [ts.translate_text(text) + ' high quality, high resolution, 4 k'] * num_eng
         
